@@ -10,6 +10,8 @@ namespace BookShopWeb.Controllers
     {
         public IActionResult Get()
         {
+            //Good Idea - To use some mock sample data/JSON file/Data file --> until your DB is ready
+            //Makes it easier to focus on static data with no NOISE, get everything in order at the front end. And then, move to developing the backend. Make sure all your connections and actions work as expected first!
             var bookList = new List<Book>();
             bookList.Add(new Book
             {

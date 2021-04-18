@@ -6,7 +6,22 @@
 <h1>Welcome to BookShop</h1>
 
 <div id="app">
-    {{message}}
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="book in books">
+                <td>{{ book.name }}</td>
+                <td>{{ book.publishYear }}</td>
+                <td>{{ book.price }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 @* Razor section (name as mentioned inside layout) *@
@@ -15,8 +30,26 @@
         var app = new Vue({
             el: "#app",
             data: {
+                books: [],
                 message: "Hello from Vue"
+            },
+            mounted: function () {
+                //VueJS feature - Mounted gets called when the page is fully loaded and the user is about to use the page.
+                //This is where we should be loading data from backend to frontend. Why? --> Because we want everything in the page to be loaded and ready (html + css)
+                //Good Idea - To add a spinner or progress bar for bigger applications (with loads of REAL data from the backend)!
+                this.getBooks();
+            },
+            methods: {
+                getBooks: function () {
+                    //JQUery - Simplest and easiest library to use with ajax
+                    var vm = this;
+
+                    $.ajax({ url: "/api/book/", method: "GET" })
+                        .done(function (data) {
+                            vm.books = data;
+                        })
+                }
             }
-        })
+        });
     </script>
 }
