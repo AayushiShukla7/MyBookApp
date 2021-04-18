@@ -3,4 +3,20 @@
 @{
 }
 
-<h1>Welcome to BookShop!</h1>
+<h1>Welcome to BookShop</h1>
+
+<div id="app">
+    {{message}}
+</div>
+
+@* Razor section (name as mentioned inside layout) *@
+@section scripts{
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "Hello from Vue"
+            }
+        })
+    </script>
+}
