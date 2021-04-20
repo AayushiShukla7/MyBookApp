@@ -8,6 +8,7 @@ namespace BookShopWeb.Controllers
     [ApiController]
     public class BookController : ControllerBase    //Use 'ControllerBase' instead of 'Controller' --> Makes it easier to control and use
     {
+        [HttpGet]
         public IActionResult Get()
         {
             //Good Idea - To use some mock sample data/JSON file/Data file --> until your DB is ready
@@ -39,6 +40,14 @@ namespace BookShopWeb.Controllers
             });
 
             return Ok(bookList);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Book model)
+        {
+            //TO DO: Save data to database
+
+            return Ok(model);
         }
     }
 }

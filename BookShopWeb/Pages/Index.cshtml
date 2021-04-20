@@ -55,14 +55,29 @@
                 addBook: function () {
                     //Good Practice - Always create a variable with the current instance (ViewModel) while working with VueJS
                     var vm = this;
+
+                    //Adding a client-side book to the data, but not being sent to the server to be saved in the database.
                     var newBook = {
                         name: vm.name,
                         year: vm.year,
                         price: vm.price
                     };
 
-                    //Adding a new book to the 'books' collection. Using Splice(start, delete, content) makes it super easy!
-                    vm.books.splice(0, 0, newBook);
+                    //Post this data to server through ajax
+                    $.ajax({
+                        url: "/api/book/",
+                        method: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(newBook)   //this method converts the JSON data into string to be sent to server through ajax
+                    }).done(function (model) {   //done - Makes sure that the book gets added only when the connection from client to server is SUCCESS!
+                        //Adding a new book to the 'books' collection. Using Splice(start, delete, content) makes it super easy!
+                        //vm.books.splice(0, 0, newBook);
+
+                        //ID for the model being sent by the client is needed. Instead of above, use below -
+                        //Helps when the model class doesn't have an ID of its own. This case, the server generates a unique ID to be used by the client.
+                        vm.books.splice(0, 0, model);
+                    })
+                    
                 },
                 getBooks: function () {
                     //JQUery - Simplest and easiest library to use with ajax
