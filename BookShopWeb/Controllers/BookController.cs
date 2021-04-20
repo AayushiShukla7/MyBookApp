@@ -16,25 +16,25 @@ namespace BookShopWeb.Controllers
             bookList.Add(new Book
             {
                 Name = "The Subtle Art Of Not Giving A Fuck!",
-                PublishYear = 2016,
+                Year = 2016,
                 Price = 499
             });
             bookList.Add(new Book
             {
                 Name = "Learn C#",
-                PublishYear = 2019,
+                Year = 2019,
                 Price = 123.45M
             });
             bookList.Add(new Book
             {
                 Name = "Learn VueJS",
-                PublishYear = 2018,
+                Year = 2018,
                 Price = 45.99M
             });
             bookList.Add(new Book
             {
                 Name = "Learn MongoDb",
-                PublishYear = 2019,
+                Year = 2019,
                 Price = 70.01M
             });
 

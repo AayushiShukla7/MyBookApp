@@ -6,18 +6,27 @@
 <h1>Welcome to BookShop</h1>
 
 <div id="app">
+    @* mt - Margin Top, mb - Margin Bottom, m - Margin (left/right) *@
+    <div class="mt-2 mb-2">
+        <input class="form-control" placeholder="Name" v-model="name" />
+        <input class="form-control" placeholder="Year" v-model="year" />
+        <input class="form-control" placeholder="Price" v-model="price" />
+
+        <button class="btn btn-primary mt-2 mb-2" style="width:100px" v-on:click="addBook">Add</button>
+    </div>
+
     <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Year</th>
+                <th>Publish Year</th>
                 <th>Price</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="book in books">
                 <td>{{ book.name }}</td>
-                <td>{{ book.publishYear }}</td>
+                <td>{{ book.year }}</td>
                 <td>{{ book.price }}</td>
             </tr>
         </tbody>
@@ -31,6 +40,9 @@
             el: "#app",
             data: {
                 books: [],
+                name: "",
+                year: "",
+                price: "",
                 message: "Hello from Vue"
             },
             mounted: function () {
@@ -40,6 +52,18 @@
                 this.getBooks();
             },
             methods: {
+                addBook: function () {
+                    //Good Practice - Always create a variable with the current instance (ViewModel) while working with VueJS
+                    var vm = this;
+                    var newBook = {
+                        name: vm.name,
+                        year: vm.year,
+                        price: vm.price
+                    };
+
+                    //Adding a new book to the 'books' collection. Using Splice(start, delete, content) makes it super easy!
+                    vm.books.splice(0, 0, newBook);
+                },
                 getBooks: function () {
                     //JQUery - Simplest and easiest library to use with ajax
                     var vm = this;
